@@ -22,9 +22,6 @@ npx serve
 python3 -m http.server
 ```
 
-Opening `index.html` directly from disk (`file://`) will not work, because the
-app fetches device files over HTTP.
-
 ## Development
 
 Dev tooling (linters) is managed with npm. It is only needed for contributing -
