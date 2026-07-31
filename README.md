@@ -29,7 +29,7 @@ running the app itself needs no install.
 
 ```bash
 npm install   # installs linters and sets up the pre-commit hook
-npm run lint   # eslint + stylelint + json format check
+npm run lint   # eslint + stylelint + json format check + html-validate
 ```
 
 Linting runs in CI on every pull request and must pass before merge.
