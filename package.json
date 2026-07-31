@@ -5,10 +5,11 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "lint": "npm run lint:js && npm run lint:css && npm run lint:json",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:json && npm run lint:html",
     "lint:js": "eslint .",
     "lint:css": "stylelint \"css/**/*.css\" --allow-empty-input",
     "lint:json": "prettier --check \"**/*.json\"",
+    "lint:html": "html-validate index.html",
     "format": "prettier --write \"**/*.{json,md,yml,yaml}\"",
     "prepare": "husky"
   },
@@ -17,6 +18,7 @@
     "eslint": "^10.8.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.8.0",
+    "html-validate": "^11.6.0",
     "husky": "^9.1.7",
     "prettier": "^3.9.6",
     "stylelint": "^17.14.1",
