@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CC-rand</title>
+    <meta
+      name="description"
+      content="Send random CC and NRPN values to MIDI devices."
+    />
+  </head>
+  <body>
+    <header>
+      <h1>CC-rand</h1>
+      <p>Send random CC and NRPN values to your MIDI devices.</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>MIDI output</h2>
+
+        <label for="midi-output">Output port</label>
+        <select id="midi-output">
+          <option value="">No ports available</option>
+        </select>
+
+        <label for="midi-channel">Channel</label>
+        <select id="midi-channel">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+          <option value="16">16</option>
+        </select>
+
+        <button id="refresh-ports" type="button">Refresh ports</button>
+
+        <p id="midi-status"></p>
+      </section>
+
+      <section>
+        <h2>Device</h2>
+
+        <label for="device-select">Device</label>
+        <select id="device-select">
+          <option value="">No devices available</option>
+        </select>
+
+        <button id="new-device" type="button">New device</button>
+      </section>
+
+      <section>
+        <h2>Parameters</h2>
+
+        <div id="parameter-headings">
+          <span>Name</span>
+          <span>Type</span>
+          <span>Number</span>
+          <span>Min</span>
+          <span>Max</span>
+          <span>Enabled</span>
+          <span></span>
+        </div>
+
+        <ul id="parameter-rows">
+          <li class="parameter">
+            <input
+              class="parameter-name"
+              data-field="name"
+              type="text"
+              value="Cutoff"
+            />
+            <select class="parameter-type" data-field="type">
+              <option value="cc" selected>CC</option>
+              <option value="nrpn">NRPN</option>
+            </select>
+            <input
+              class="parameter-number"
+              data-field="number"
+              type="number"
+              min="0"
+              max="16383"
+              value="43"
+            />
+            <input
+              class="parameter-min"
+              data-field="min"
+              type="number"
+              min="0"
+              max="16383"
+              value="0"
+            />
+            <input
+              class="parameter-max"
+              data-field="max"
+              type="number"
+              min="0"
+              max="16383"
+              value="127"
+            />
+            <input
+              class="parameter-enabled"
+              data-field="enabled"
+              type="checkbox"
+              checked
+            />
+            <button class="parameter-remove" type="button">Remove</button>
+          </li>
+
+          <li class="parameter">
+            <input
+              class="parameter-name"
+              data-field="name"
+              type="text"
+              value="Resonance"
+            />
+            <select class="parameter-type" data-field="type">
+              <option value="cc" selected>CC</option>
+              <option value="nrpn">NRPN</option>
+            </select>
+            <input
+              class="parameter-number"
+              data-field="number"
+              type="number"
+              min="0"
+              max="16383"
+              value="44"
+            />
+            <input
+              class="parameter-min"
+              data-field="min"
+              type="number"
+              min="0"
+              max="16383"
+              value="0"
+            />
+            <input
+              class="parameter-max"
+              data-field="max"
+              type="number"
+              min="0"
+              max="16383"
+              value="127"
+            />
+            <input
+              class="parameter-enabled"
+              data-field="enabled"
+              type="checkbox"
+              checked
+            />
+            <button class="parameter-remove" type="button">Remove</button>
+          </li>
+
+          <li class="parameter">
+            <input
+              class="parameter-name"
+              data-field="name"
+              type="text"
+              value="Envelope amount"
+            />
+            <select class="parameter-type" data-field="type">
+              <option value="cc">CC</option>
+              <option value="nrpn" selected>NRPN</option>
+            </select>
+            <input
+              class="parameter-number"
+              data-field="number"
+              type="number"
+              min="0"
+              max="16383"
+              value="1024"
+            />
+            <input
+              class="parameter-min"
+              data-field="min"
+              type="number"
+              min="0"
+              max="16383"
+              value="0"
+            />
+            <input
+              class="parameter-max"
+              data-field="max"
+              type="number"
+              min="0"
+              max="16383"
+              value="16383"
+            />
+            <input
+              class="parameter-enabled"
+              data-field="enabled"
+              type="checkbox"
+            />
+            <button class="parameter-remove" type="button">Remove</button>
+          </li>
+        </ul>
+
+        <template id="parameter-row">
+          <li class="parameter">
+            <input class="parameter-name" data-field="name" type="text" />
+            <select class="parameter-type" data-field="type">
+              <option value="cc">CC</option>
+              <option value="nrpn">NRPN</option>
+            </select>
+            <input
+              class="parameter-number"
+              data-field="number"
+              type="number"
+              min="0"
+              max="16383"
+            />
+            <input
+              class="parameter-min"
+              data-field="min"
+              type="number"
+              min="0"
+              max="16383"
+            />
+            <input
+              class="parameter-max"
+              data-field="max"
+              type="number"
+              min="0"
+              max="16383"
+            />
+            <input
+              class="parameter-enabled"
+              data-field="enabled"
+              type="checkbox"
+            />
+            <button class="parameter-remove" type="button">Remove</button>
+          </li>
+        </template>
+
+        <button id="randomise" type="button">Randomise</button>
+      </section>
+
+      <section>
+        <h2>Edit device</h2>
+
+        <label for="device-name">Name</label>
+        <input id="device-name" type="text" />
+
+        <label for="device-manufacturer">Manufacturer</label>
+        <input id="device-manufacturer" type="text" />
+
+        <button id="add-parameter" type="button">Add parameter</button>
+        <button id="save-device" type="button">Save device</button>
+        <button id="export-device" type="button">Export JSON</button>
+
+        <label for="import-device">Import JSON</label>
+        <input id="import-device" type="file" accept="application/json" />
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Requires a Chromium-based browser (Chrome, Edge) for Web MIDI support.
+      </p>
+      <p><a href="https://github.com/llozd/CC-rand">Source on GitHub</a></p>
+    </footer>
+  </body>
+</html>
