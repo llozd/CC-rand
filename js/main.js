@@ -4,16 +4,26 @@ import {
   isSupported,
   onPortsChanged,
   requestAccess,
+  sendCC,
+  sendNRPN,
+  setChannel,
+  setOutput,
 } from "./midi.js";
-import { renderParameters } from "./ui.js";
+import { randomiseParameters } from "./randomiser.js";
+import { onParameterEdit, renderParameters } from "./ui.js";
 
 const outputSelect = document.querySelector("#midi-output");
+const channelSelect = document.querySelector("#midi-channel");
 const refreshButton = document.querySelector("#refresh-ports");
 const statusLine = document.querySelector("#midi-status");
 const deviceSelect = document.querySelector("#device-select");
+const randomiseButton = document.querySelector("#randomise");
+
+const NUMERIC_FIELDS = new Set(["number", "min", "max"]);
 
 let connected = false;
 let devices = [];
+let currentDevice = null;
 
 function setStatus(message) {
   statusLine.textContent = message;
@@ -31,6 +41,7 @@ function renderOutputs() {
 
   if (outputs.length === 0) {
     outputSelect.replaceChildren(placeholderOption("No ports available"));
+    setOutput("");
     setStatus("No MIDI output ports found. Connect a device and refresh.");
     return;
   }
@@ -51,6 +62,7 @@ function renderOutputs() {
     outputSelect.value = selected;
   }
 
+  setOutput(outputSelect.value);
   setStatus(`${outputs.length} MIDI output port(s) available.`);
 }
 
@@ -89,8 +101,37 @@ function selectDevice(index) {
   const device = devices[index];
 
   if (device) {
+    currentDevice = device;
     renderParameters(device.parameters);
   }
+}
+
+function randomise() {
+  if (!currentDevice) {
+    return;
+  }
+
+  const picks = randomiseParameters(currentDevice.parameters);
+
+  if (picks.length === 0) {
+    setStatus("No parameters are enabled.");
+    return;
+  }
+
+  try {
+    for (const { parameter, value } of picks) {
+      if (parameter.type === "nrpn") {
+        sendNRPN(parameter.number, value);
+      } else {
+        sendCC(parameter.number, value);
+      }
+    }
+  } catch (error) {
+    setStatus(error.message);
+    return;
+  }
+
+  setStatus(`Randomised ${picks.length} parameter(s).`);
 }
 
 async function loadDevices() {
@@ -120,6 +161,26 @@ refreshButton.addEventListener("click", () => {
 
 deviceSelect.addEventListener("change", () => {
   selectDevice(Number(deviceSelect.value));
+});
+
+outputSelect.addEventListener("change", () => {
+  setOutput(outputSelect.value);
+});
+
+channelSelect.addEventListener("change", () => {
+  setChannel(Number(channelSelect.value));
+});
+
+randomiseButton.addEventListener("click", randomise);
+
+// Keep the parameter objects in step with the inputs, so Randomise uses what
+// is on screen rather than what the device file shipped with.
+onParameterEdit((index, field, value) => {
+  const parameter = currentDevice?.parameters[index];
+
+  if (parameter) {
+    parameter[field] = NUMERIC_FIELDS.has(field) ? Number(value) : value;
+  }
 });
 
 connect();

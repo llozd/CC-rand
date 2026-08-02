@@ -22,3 +22,23 @@ function createRow(parameter) {
 export function renderParameters(parameters) {
   parameterList.replaceChildren(...parameters.map(createRow));
 }
+
+/**
+ * Reports edits to the parameter rows as (index, field, value). The row's
+ * position is read at event time, so it stays correct as rows come and go.
+ */
+export function onParameterEdit(handler) {
+  parameterList.addEventListener("input", (event) => {
+    const input = event.target;
+    const field = input.dataset.field;
+
+    if (!field) {
+      return;
+    }
+
+    const row = input.closest(".parameter");
+    const index = [...parameterList.children].indexOf(row);
+
+    handler(index, field, input.type === "checkbox" ? input.checked : input.value);
+  });
+}
