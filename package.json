@@ -5,16 +5,18 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "lint": "npm run lint:js && npm run lint:css && npm run lint:json && npm run lint:html",
+    "lint": "npm run lint:js && npm run lint:css && npm run lint:json && npm run lint:html && npm run lint:devices",
     "lint:js": "eslint .",
     "lint:css": "stylelint \"css/**/*.css\" --allow-empty-input",
     "lint:json": "prettier --check \"**/*.json\"",
     "lint:html": "html-validate index.html",
+    "lint:devices": "node scripts/validate-devices.mjs",
     "format": "prettier --write \"**/*.{json,md,yml,yaml}\"",
     "prepare": "husky"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "ajv": "^8.20.0",
     "eslint": "^10.8.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^17.8.0",

@@ -1,15 +1,19 @@
+import { loadShippedDevices } from "./devices.js";
 import {
   getOutputs,
   isSupported,
   onPortsChanged,
   requestAccess,
 } from "./midi.js";
+import { renderParameters } from "./ui.js";
 
 const outputSelect = document.querySelector("#midi-output");
 const refreshButton = document.querySelector("#refresh-ports");
 const statusLine = document.querySelector("#midi-status");
+const deviceSelect = document.querySelector("#device-select");
 
 let connected = false;
+let devices = [];
 
 function setStatus(message) {
   statusLine.textContent = message;
@@ -70,6 +74,42 @@ async function connect() {
   renderOutputs();
 }
 
+function renderDeviceOptions() {
+  deviceSelect.replaceChildren(
+    ...devices.map((device, index) => {
+      const option = document.createElement("option");
+      option.value = String(index);
+      option.textContent = `${device.manufacturer} ${device.name}`;
+      return option;
+    }),
+  );
+}
+
+function selectDevice(index) {
+  const device = devices[index];
+
+  if (device) {
+    renderParameters(device.parameters);
+  }
+}
+
+async function loadDevices() {
+  try {
+    devices = await loadShippedDevices();
+  } catch (error) {
+    deviceSelect.replaceChildren(placeholderOption("Could not load devices"));
+    console.error(error);
+    return;
+  }
+
+  if (devices.length === 0) {
+    return;
+  }
+
+  renderDeviceOptions();
+  selectDevice(0);
+}
+
 refreshButton.addEventListener("click", () => {
   if (connected) {
     renderOutputs();
@@ -78,4 +118,9 @@ refreshButton.addEventListener("click", () => {
   }
 });
 
+deviceSelect.addEventListener("change", () => {
+  selectDevice(Number(deviceSelect.value));
+});
+
 connect();
+loadDevices();
