@@ -1,0 +1,63 @@
+/**
+ * Validates every shipped device file against devices/schema.json, and checks
+ * that the manifest and the directory agree. Run as part of `npm run lint`.
+ */
+
+import { readdir, readFile } from "node:fs/promises";
+import { join } from "node:path";
+import Ajv from "ajv/dist/2020.js";
+
+const DEVICES_DIR = "devices";
+const NOT_DEVICES = new Set(["schema.json", "index.json"]);
+
+const readJson = async (path) => JSON.parse(await readFile(path, "utf8"));
+
+const errors = [];
+
+const schema = await readJson(join(DEVICES_DIR, "schema.json"));
+const manifest = await readJson(join(DEVICES_DIR, "index.json"));
+const present = (await readdir(DEVICES_DIR)).filter(
+  (file) => file.endsWith(".json") && !NOT_DEVICES.has(file),
+);
+
+for (const file of present) {
+  if (!manifest.includes(file)) {
+    errors.push(`${file} is not listed in index.json`);
+  }
+}
+
+for (const file of manifest) {
+  if (!present.includes(file)) {
+    errors.push(`index.json lists ${file}, which does not exist`);
+  }
+}
+
+const validate = new Ajv({ allErrors: true }).compile(schema);
+
+for (const file of manifest.filter((name) => present.includes(name))) {
+  const device = await readJson(join(DEVICES_DIR, file));
+
+  if (!validate(device)) {
+    for (const error of validate.errors) {
+      errors.push(`${file}: ${error.instancePath || "/"} ${error.message}`);
+    }
+    continue;
+  }
+
+  // Ranges are checked here rather than in the schema, which can't compare two
+  // sibling properties.
+  for (const [index, parameter] of device.parameters.entries()) {
+    if (parameter.min > parameter.max) {
+      errors.push(
+        `${file}: parameters[${index}] "${parameter.name}" has min ${parameter.min} above max ${parameter.max}`,
+      );
+    }
+  }
+}
+
+if (errors.length > 0) {
+  console.error(`Device validation failed:\n  ${errors.join("\n  ")}`);
+  process.exit(1);
+}
+
+console.log(`Validated ${manifest.length} device file(s).`);
