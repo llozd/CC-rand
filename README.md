@@ -8,8 +8,10 @@ to send a fresh random value to every enabled parameter.
 
 ## Requirements
 
-- A Chromium-based browser (Chrome, Edge). MIDI output uses the Web MIDI API,
-  which is not available in Firefox or Safari.
+- A Chromium-based browser (Chrome, Edge, Brave). MIDI output uses the Web MIDI
+  API, which is not available in Firefox or Safari.
+- The browser asks permission the first time the page requests MIDI access. The
+  app can't list output ports until it is granted.
 
 ## Running locally
 
