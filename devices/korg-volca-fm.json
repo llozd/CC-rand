@@ -76,6 +76,14 @@
       "enabled": true
     },
     {
+      "name": "Arpeggiator type",
+      "type": "cc",
+      "number": 49,
+      "min": 0,
+      "max": 127,
+      "enabled": false
+    },
+    {
       "name": "Arpeggiator div",
       "type": "cc",
       "number": 50,
