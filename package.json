@@ -13,6 +13,7 @@
     "lint:devices": "node scripts/validate-devices.mjs",
     "format": "prettier --write \"**/*.{json,md,yml,yaml}\"",
     "manifest": "node scripts/generate-manifest.mjs",
+    "test": "node --test \"test/**/*.test.mjs\"",
     "prepare": "husky"
   },
   "devDependencies": {
