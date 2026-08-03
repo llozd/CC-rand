@@ -311,9 +311,14 @@
     }
   }
 
+  #add-parameter {
+    margin-top: 0.9rem;
+  }
+
   #randomise {
     height: 2.4rem;
     margin-top: 0.9rem;
+    margin-left: auto;
     padding-inline: 1.5rem;
     font-size: 0.9rem;
     font-weight: 600;

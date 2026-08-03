@@ -113,37 +113,19 @@ async function connect() {
 const deviceLabel = ({ device }) =>
   [device.manufacturer, device.name].filter(Boolean).join(" ") || "Untitled";
 
-const GROUP_LABELS = {
-  shipped: "Shipped",
-  saved: "Saved",
-  draft: "Unsaved",
-};
-
 function renderDeviceOptions() {
-  const groups = ["shipped", "saved", "draft"].map((source) => {
-    const group = document.createElement("optgroup");
-    group.label = GROUP_LABELS[source];
+  if (entries.length === 0) {
+    deviceSelect.replaceChildren(placeholderOption("No devices available"));
+    return;
+  }
 
-    entries.forEach((entry, index) => {
-      if (entry.source !== source) {
-        return;
-      }
-
+  deviceSelect.replaceChildren(
+    ...entries.map((entry, index) => {
       const option = document.createElement("option");
       option.value = String(index);
       option.textContent = deviceLabel(entry);
-      group.append(option);
-    });
-
-    return group;
-  });
-
-  const populated = groups.filter((group) => group.children.length > 0);
-
-  deviceSelect.replaceChildren(
-    ...(populated.length > 0
-      ? populated
-      : [placeholderOption("No devices available")]),
+      return option;
+    }),
   );
 
   if (currentEntry) {
