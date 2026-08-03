@@ -222,6 +222,27 @@
       outline: 2px solid var(--accent);
       outline-offset: 1px;
     }
+
+    &:disabled {
+      color: var(--text-faint);
+      cursor: not-allowed;
+      background: var(--surface);
+
+      &:hover {
+        background: var(--surface);
+        border-color: var(--border-strong);
+      }
+    }
+  }
+
+  #editor-status {
+    flex-basis: 100%;
+    font-size: 0.85rem;
+    color: var(--text-faint);
+
+    &:empty {
+      display: none;
+    }
   }
 
   #midi-status {
