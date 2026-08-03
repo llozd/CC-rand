@@ -2,7 +2,7 @@
 
 A small web application for sending random CC and NRPN values to MIDI devices.
 
-Live at <https://llozd.github.io/CC-rand/>.
+Live at <https://llozd.github.io/CC-rand/>
 
 You define "devices" - named sets of MIDI parameters (CC or NRPN, each with a
 number and a value range) - pick a MIDI output and channel, and hit **Randomise**
