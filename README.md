@@ -30,8 +30,13 @@ Dev tooling (linters) is managed with npm. It is only needed for contributing -
 running the app itself needs no install.
 
 ```bash
-npm install   # installs linters and sets up the pre-commit hook
-npm run lint   # eslint + stylelint + json format check + html-validate
+npm install    # installs linters and sets up the pre-commit hook
+npm run lint   # eslint + stylelint + json format + html + device files
+npm run manifest   # rebuild devices/index.json after adding a device
 ```
 
 Linting runs in CI on every pull request and must pass before merge.
+
+## Adding a device
+
+Devices are plain JSON files in `devices/`. See [CONTRIBUTING.md](CONTRIBUTING.md).
