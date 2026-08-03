@@ -3,6 +3,12 @@ name: deploy
 on:
   push:
     branches: [main]
+    # A release or docs-only commit changes nothing that gets published.
+    paths-ignore:
+      - CHANGELOG.md
+      - CONTRIBUTING.md
+      - README.md
+      - "test/**"
 
 permissions:
   contents: read
