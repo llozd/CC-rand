@@ -12,6 +12,7 @@
     "lint:html": "html-validate index.html",
     "lint:devices": "node scripts/validate-devices.mjs",
     "format": "prettier --write \"**/*.{json,md,yml,yaml}\"",
+    "manifest": "node scripts/generate-manifest.mjs",
     "prepare": "husky"
   },
   "devDependencies": {
