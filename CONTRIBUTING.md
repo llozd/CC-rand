@@ -38,3 +38,7 @@ instrument's CC and NRPN parameters.
 - `min` and `max` bound what Randomise sends, so they can be narrower than the
   full range.
 - `enabled` is whether the parameter is randomised by default.
+
+## Releases
+
+The maintainer updates `CHANGELOG.md` and tags releases. Nothing to do here.
