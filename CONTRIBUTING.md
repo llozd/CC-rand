@@ -10,8 +10,7 @@ instrument's CC and NRPN parameters.
 2. Fill it in using the format below.
 3. Run `npm run manifest` to add it to `devices/index.json`. The app discovers
    devices through that manifest, because a static host can't list a directory.
-4. Add a line under `## [Unreleased]` in `CHANGELOG.md`.
-5. Run `npm run lint` and open a pull request. It runs in CI and must pass - it
+4. Run `npm run lint` and open a pull request. It runs in CI and must pass - it
    validates device files against `devices/schema.json` and fails if the
    manifest is out of date.
 
@@ -42,5 +41,4 @@ instrument's CC and NRPN parameters.
 
 ## Releases
 
-Move the `## [Unreleased]` entries under a new version heading, then
-`npm version <major|minor|patch>` and `git push --follow-tags`.
+The maintainer updates `CHANGELOG.md` and tags releases. Nothing to do here.
