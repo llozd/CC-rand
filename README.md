@@ -8,6 +8,8 @@ You define "devices" - named sets of MIDI parameters (CC or NRPN, each with a
 number and a value range) - pick a MIDI output and channel, and hit **Randomise**
 to send a fresh random value to every enabled parameter.
 
+![CC-rand with a device loaded, showing its parameters and their ranges](docs/screenshot.png)
+
 ## Requirements
 
 - A Chromium-based browser (Chrome, Edge, Brave). MIDI output uses the Web MIDI
