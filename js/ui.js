@@ -23,6 +23,26 @@ export function renderParameters(parameters) {
   parameterList.replaceChildren(...parameters.map(createRow));
 }
 
+/** Appends one row without rebuilding the list, so focus is left alone. */
+export function appendParameter(parameter) {
+  parameterList.append(createRow(parameter));
+}
+
+const rowIndex = (element) =>
+  [...parameterList.children].indexOf(element.closest(".parameter"));
+
+export function onParameterRemove(handler) {
+  parameterList.addEventListener("click", (event) => {
+    if (!event.target.matches(".parameter-remove")) {
+      return;
+    }
+
+    const row = event.target.closest(".parameter");
+    handler(rowIndex(event.target));
+    row.remove();
+  });
+}
+
 /**
  * Reports edits to the parameter rows as (index, field, value). The row's
  * position is read at event time, so it stays correct as rows come and go.
@@ -36,9 +56,10 @@ export function onParameterEdit(handler) {
       return;
     }
 
-    const row = input.closest(".parameter");
-    const index = [...parameterList.children].indexOf(row);
-
-    handler(index, field, input.type === "checkbox" ? input.checked : input.value);
+    handler(
+      rowIndex(input),
+      field,
+      input.type === "checkbox" ? input.checked : input.value,
+    );
   });
 }

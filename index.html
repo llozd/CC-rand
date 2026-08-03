@@ -113,6 +113,7 @@
           </li>
         </template>
 
+        <button id="add-parameter" type="button">Add parameter</button>
         <button id="randomise" type="button">Randomise</button>
       </section>
 
@@ -125,12 +126,14 @@
         <label for="device-manufacturer">Manufacturer</label>
         <input id="device-manufacturer" type="text" />
 
-        <button id="add-parameter" type="button">Add parameter</button>
         <button id="save-device" type="button">Save device</button>
         <button id="export-device" type="button">Export JSON</button>
+        <button id="delete-device" type="button">Delete device</button>
 
         <label for="import-device">Import JSON</label>
         <input id="import-device" type="file" accept="application/json" />
+
+        <p id="editor-status"></p>
       </section>
     </main>
 
