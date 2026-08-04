@@ -4,7 +4,7 @@ A small web application for sending random CC and NRPN values to MIDI devices.
 
 Live at <https://llozd.github.io/midi-randomiser/>
 
-You define "devices" - named sets of MIDI parameters (CC or NRPN, each with a
+You define devices - named sets of MIDI parameters (CC or NRPN, each with a
 number and a value range) - pick a MIDI output and channel, and hit **Randomise**
 to send a fresh random value to every enabled parameter.
 
@@ -30,7 +30,7 @@ python3 -m http.server
 
 ## Development
 
-Dev tooling (linters) is managed with npm. It is only needed for contributing -
+Dev tooling is managed with npm. It is only needed for contributing -
 running the app itself needs no install.
 
 ```bash
