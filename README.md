@@ -1,6 +1,7 @@
 # MIDI Randomiser
 
 A small web application for sending random CC and NRPN values to MIDI devices.
+A MIDI randomiser for hardware synths.
 
 Live at <https://llozd.github.io/midi-randomiser/>
 
