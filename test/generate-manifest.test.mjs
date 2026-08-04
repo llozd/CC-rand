@@ -21,7 +21,7 @@ const DEVICE = JSON.stringify({
 
 /** Builds a temp repo containing just a devices/ directory. */
 async function fixture(files) {
-  const dir = await mkdtemp(join(tmpdir(), "ccrand-manifest-"));
+  const dir = await mkdtemp(join(tmpdir(), "midi-randomiser-manifest-"));
   await mkdir(join(dir, "devices"));
 
   for (const [name, contents] of Object.entries(files)) {

@@ -1,5 +1,7 @@
 /** User-created devices, persisted in localStorage. Keyed by device name. */
 
+// Kept from the project's former name. Renaming it would orphan every device
+// anyone has already saved.
 const KEY = "cc-rand.devices";
 
 function read() {

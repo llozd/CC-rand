@@ -1,14 +1,15 @@
-# CC-rand
+# MIDI Randomiser
 
 A small web application for sending random CC and NRPN values to MIDI devices.
+A MIDI randomiser (or randomizer) for hardware synths.
 
-Live at <https://llozd.github.io/CC-rand/>
+Live at <https://llozd.github.io/midi-randomiser/>
 
 You define "devices" - named sets of MIDI parameters (CC or NRPN, each with a
 number and a value range) - pick a MIDI output and channel, and hit **Randomise**
 to send a fresh random value to every enabled parameter.
 
-![CC-rand with a device loaded, showing its parameters and their ranges](docs/screenshot.png)
+![MIDI Randomiser with a device loaded, showing its parameters and their ranges](docs/screenshot.png)
 
 ## Requirements
 
