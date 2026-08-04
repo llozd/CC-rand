@@ -57,9 +57,9 @@ test("deleting removes only the named device", () => {
 });
 
 test("corrupt storage is treated as empty rather than throwing", () => {
-  store.set("cc-rand.devices", "{not json");
+  store.set("midi-randomiser.devices", "{not json");
   assert.deepEqual(getUserDevices(), []);
 
-  store.set("cc-rand.devices", '{"not":"an array"}');
+  store.set("midi-randomiser.devices", '{"not":"an array"}');
   assert.deepEqual(getUserDevices(), []);
 });

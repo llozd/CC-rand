@@ -34,7 +34,7 @@ const device = (parameters) => ({
 
 /** Temp repo with the real schema, the given device files, and a manifest. */
 async function fixture(devices, manifest = Object.keys(devices)) {
-  const dir = await mkdtemp(join(tmpdir(), "ccrand-validate-"));
+  const dir = await mkdtemp(join(tmpdir(), "midi-randomiser-validate-"));
   await mkdir(join(dir, "devices"));
   await copyFile(SCHEMA, join(dir, "devices", "schema.json"));
 

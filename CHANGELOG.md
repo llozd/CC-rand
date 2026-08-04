@@ -23,5 +23,5 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
   import and export them as JSON, and delete saved devices.
 - A dark interface sized for desktop browsers.
 
-[Unreleased]: https://github.com/llozd/CC-rand/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/llozd/CC-rand/releases/tag/v0.1.0
+[Unreleased]: https://github.com/llozd/midi-randomiser/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/llozd/midi-randomiser/releases/tag/v0.1.0

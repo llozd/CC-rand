@@ -1,6 +1,6 @@
 /** User-created devices, persisted in localStorage. Keyed by device name. */
 
-const KEY = "cc-rand.devices";
+const KEY = "midi-randomiser.devices";
 
 function read() {
   try {
