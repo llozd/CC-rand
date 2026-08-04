@@ -4,9 +4,11 @@ A small web application for sending random CC and NRPN values to MIDI devices.
 
 Live at <https://llozd.github.io/midi-randomiser/>
 
-You define devices - named sets of MIDI parameters (CC or NRPN, each with a
+Features configurable devices by creating sets of MIDI parameters (CC or NRPN, each with a
 number and a value range) - pick a MIDI output and channel, and hit **Randomise**
 to send a fresh random value to every enabled parameter.
+
+Devices can be imported, saved, and exported, and are stored in JSON format.
 
 ![MIDI Randomiser with a device loaded, showing its parameters and their ranges](docs/screenshot.png)
 
